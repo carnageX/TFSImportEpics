@@ -22,3 +22,8 @@ Some prerequisites for running the script:
   - Visual Studio 2017  OR 
   - Team Explorer 2017 (available [here](https://www.visualstudio.com/thank-you-downloading-visual-studio/?sku=TeamExplorer&rel=15) )
 - TFS Admin access
+
+# Example
+```
+Upgrade-WorkItems -collection "DefaultCollection" -project "TestProject" -baseTemplate "Scrum" -pathToEpic "C:\TFS\Scrum\WorkItem Tracking\TypeDefinitions\Epic.xml"
+```
