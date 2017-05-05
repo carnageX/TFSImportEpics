@@ -91,12 +91,20 @@ if ((Get-Alias -Name witadmin -ErrorAction SilentlyContinue) -eq $null) {
 }
 
 if(-not (Test-Path $pathToWitAdmin)) {
-    # Fallback to VS 2015's directory for WitAdmin.exe 
-    $pathToWitAdmin = 'C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\witadmin.exe'
-    if(-not(Test-Path $pathToWitAdmin)) {
-        Write-Error "WITAdmin.exe not found at $pathToWitAdmin"
-        exit 1
-    }
+	Write-Host "Could not find WitAdmin.exe at default VS 2017 path - falling back to Team Explorer directory" -ForegroundColor Yellow
+	# Fallback to Team Explorer 2017 directory for WitAdmin.exe 
+	$pathToWitAdmin = 'C:\Program Files (x86)\Microsoft Visual Studio\2017\TeamExplorer\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\witadmin.exe'
+	if(-not (Test-Path $pathToWitAdmin) {
+		Write-Host "Could not find WitAdmin.exe at default Team Explorer 2017 path - falling back to VS 2015 directory" -ForegroundColor Yellow
+		# Fallback to VS 2015's directory for WitAdmin.exe 
+		$pathToWitAdmin = 'C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\witadmin.exe'
+		if(-not(Test-Path $pathToWitAdmin)) {
+			Write-Error "WITAdmin.exe not found at $pathToWitAdmin"
+            Write-Error "Please specify the WitAdmin.exe path with the -pathToWithAdmin parameter"
+			exit 1
+		}
+	}
+    
 }
 Write-Host "Using WitAdmin.exe from: $pathtoWitAdmin" -ForegroundColor Cyan
 
